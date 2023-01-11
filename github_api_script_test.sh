@@ -16,10 +16,10 @@ RESPONSE=$(curl -s "$API_ENDPOINT")
 if [ -z "$2" ]; then
     # If no specific property was passed in, print the entire response
     echo "$RESPONSE"
-else
     # Extract value of the passed property from json 
     echo "Property : $2"
 
+  # récupérer la valeur d'une propriété spécifiée, en supprimant les guillemets et en affichant le résultat sous la forme "value: [value of the property]"
     echo "value: $(echo  $RESPONSE | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep $2 | cut -d':' -f2- | tr -d '"' )"
     
 fi
